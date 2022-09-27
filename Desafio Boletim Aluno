@@ -1,0 +1,46 @@
+#include <stdio.h>
+#define TAMANHO 2
+#define MEDIA(a, b) (a+b)/2
+
+struct Aluno{
+    int matricula;
+    float n1, n2, media;
+};
+
+float lerNota(){
+    float temp;
+    scanf("%f", &temp);
+    while(temp < 0 || temp > 10){
+        printf("Digite um valor entre 0 e 10: ");
+        scanf("%f", &temp);
+    }
+    return temp;
+}
+
+int main() {
+    
+    struct Aluno vec[TAMANHO];
+    float soma = 0.0f;
+    for(int i = 0; i < TAMANHO; i++){
+        printf("\n-----------------------------------------");
+        printf("\nMatricula: ");
+        scanf("%d", &vec[i].matricula);
+        printf("\nNota n1: ");
+        vec[i].n1 = lerNota();
+        printf("\nNota n2: ");
+        vec[i].n2 = lerNota();
+        vec[i].media = MEDIA(vec[i].n1, vec[i].n2);
+        soma = soma + vec[i].media;
+    }
+    for(int i = 0; i < TAMANHO; i++){
+        printf("\n\n||||||||||||| ALUNO %d ||||||||||||", vec[i].matricula);
+        printf("\nNota da n1: %f", vec[i].n1);
+        printf("\nNota da n2: %f", vec[i].n2);
+        printf("\nMedia: %f %s", vec[i].media, (vec[i].media >= soma/TAMANHO) ? "(ACIMA DA MEDIA)" : "(ABAIXO DA MEDIA)");
+    }
+    printf("\n\n\nRELATÓRIO GERAL: ");
+    printf("\nQuantidade de alunos na sala: %d", TAMANHO);
+    printf("\nMedia geral da sala: %f", soma/TAMANHO);
+
+    return 0;
+}
